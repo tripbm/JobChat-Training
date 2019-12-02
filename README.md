@@ -20,5 +20,5 @@
 ## Prototype:
 https://marvelapp.com/
 
-## Detail EST										
-
+## Detail EST:
+https://github.com/LobeSoftware/JobChat-Training/projects/1?fullscreen=true
