@@ -7,8 +7,8 @@
 ## Requirement:
 - Authencation (login/register by email)
 - Add friend = email
-- Create project
-- Chat 1-1, project
+- Create group
+- Chat 1-1, group
 - Chức năng gửi ảnh, hiển thị ảnh
 - View TO/REP
 
