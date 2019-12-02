@@ -1,8 +1,8 @@
 # JobChat-Training
 
 ## Infor:
-- 
-- Demo:
+- Nguyễn Văn A
+- Demo: 01/01/2020
 
 ## Requirement:
 - Authencation (login/register by email)
