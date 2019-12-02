@@ -17,5 +17,8 @@
 - IOS: Swift, RxSwift, RxCocoa, Firebase(Authencation, Realtime DB) , MVP
 - Web (NodeJS - VueJS/ReactJS): *TBD*
 
-## Detail EST
-												
+## Prototype:
+https://marvelapp.com/
+
+## Detail EST										
+
