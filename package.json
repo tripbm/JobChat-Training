@@ -1,0 +1,39 @@
+{
+  "name": "jobchat-training",
+  "version": "1.0.0",
+  "description": "App with express mongodb mongoose",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node app.js",
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tripbm/JobChat-Training.git"
+  },
+  "author": "minh tri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tripbm/JobChat-Training/issues"
+  },
+  "homepage": "https://github.com/tripbm/JobChat-Training#readme",
+  "dependencies": {
+    "apollo-server": "^2.9.13",
+    "apollo-server-express": "^2.9.13",
+    "bcrypt": "^3.0.7",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.14",
+    "nodemon": "^2.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.6"
+  }
+}
