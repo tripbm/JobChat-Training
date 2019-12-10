@@ -22,3 +22,5 @@ https://marvelapp.com/
 
 ## Detail EST:
 https://github.com/LobeSoftware/JobChat-Training/projects/1?fullscreen=true
+
+https://github.com/LukasChiama/mini_chat_app
