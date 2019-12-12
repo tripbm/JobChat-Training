@@ -3,8 +3,8 @@ import { gql } from 'apollo-server-express';
 const typeDefs = gql`
 # defines type
 type User {
-    user_id: Int!,
-    user_name: String!,
+    userId: Int!,
+    userName: String!,
     password: String!,
     email: String!,
     firstName: String,
@@ -20,31 +20,37 @@ type token {
 
 # defines input
 input InputLogin {
-    user_name: String!
+    userName: String!
     password: String!
 }
 
 input InputCreateUser {
-    user_id: Int!,
-        user_name: String!,
-        password: String!,
-        email: String!,
-        firstName: String,
-        lastName: String,
-        birthday: String,
-        gender: Int ,
-        action: Boolean ,
-        role: Int
+    userId: Int!,
+    userName: String!,
+    password: String!,
+    email: String!,
+    firstName: String,
+    lastName: String,
+    birthday: String,
+    gender: Int ,
+    action: Boolean ,
+    role: Int
 }
 
 type Query {
-    user(id: Int!): User!
+    user(id: Int!): User
+    listUsers(page: Int, limit: Int): [User]
     login(data: InputLogin): token!
+}
+
+type CreateUserResult {
+    error: Int,
+    message: String
 }
 
 type Mutation {
         createUser(
-        data: InputCreateUser!) : User!
+        data: InputCreateUser!) : CreateUserResult
 }
-`
+`;
 export default typeDefs;
