@@ -1,9 +1,8 @@
-import User from '../../models/user';
-
+import { LIMIT } from '../../../config/index';
 export default class baseRepo {
-    async getAll({ page, limit }){
+    async getAll({ page = 0, limit = LIMIT }){
         try {
-            const responses = await User.find().skip(page).limit(limit);
+            const responses = await this.find().skip(page).limit(limit);
             return responses;
         } catch (error) {
             console.log(error);

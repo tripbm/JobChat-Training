@@ -1,3 +1,3 @@
 import userSchema from './userSchema';
-
-export default [userSchema];
+import messageSchema from './messageSchema'
+export default [userSchema, messageSchema];
