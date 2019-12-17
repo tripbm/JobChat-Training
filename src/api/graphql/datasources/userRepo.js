@@ -42,22 +42,6 @@ class userRepo extends baseRepo {
             console.log(error);
         }
     }
-    /**
-     * 
-     * @param {String} username 
-     */
-    async getAll(page = 0, limit = LIMIT){
-        try {
-            
-            const responses = await User.find().skip(page).limit(limit);
-            return responses;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    async loginUserName({ username }){
-        try {
-            const responses = await User.findOne({ userName: username });
             return responses;
         } catch (error) {
             console.log(error);
