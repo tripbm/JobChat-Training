@@ -29,4 +29,5 @@ module.exports = {
   saltRounds,
   LIMIT,
   SERVER_STATUS,
+  redisServer,
 };

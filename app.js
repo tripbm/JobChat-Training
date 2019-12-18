@@ -11,7 +11,7 @@ import resolvers from './src/api/graphql/resolvers/resolvers';
 const pubsub = new PubSub();
 import userRepo from './src/api/graphql/datasources/userRepo';
 import messageRepo from './src/api/graphql/datasources/messageRepo';
-import { secretSession, server } from './src/config/index';
+import { secretSession, server, redisServer } from './src/config/index';
 const redisStore = require('connect-redis')(expressSession);
 const client = redis.createClient();
 const app = express();
@@ -24,7 +24,12 @@ app.use(cookieParser());
 app.use(
   expressSession({
     secret: secretSession,
-    store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl: 260 }),
+    store: new redisStore({
+      host: redisServer.host,
+      port: redisServer.host,
+      client: client,
+      ttl: redisServer.ttl,
+    }),
     resave: false,
     cookie: { secure: false, maxAge: 86400000 },
     saveUninitialized: false,
@@ -41,6 +46,8 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
+
+require('./src/utils/authenGrantPassport');
 
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', { session: true }, function(err, user, info) {
@@ -96,6 +103,7 @@ const serverGraphql = new ApolloServer({
   },
 });
 
+serverGraphql.applyMiddleware({ app, path: '/graphql' });
 
 const httpServer = createServer(app);
 serverGraphql.installSubscriptionHandlers(httpServer);

@@ -62,4 +62,3 @@ class messageRepo extends baseRepo {
 }
 
 export default messageRepo;
-
