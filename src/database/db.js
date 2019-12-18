@@ -14,8 +14,7 @@ connection.then(
       console.log('Attempting to re-establish database connection.');
       mongoose.connect(config.database.uri);
     } else {
-      console.log('Error while attempting to connect to database:');
-      console.log(err);
+      console.log('Error while attempting to connect to database:', err);
     }
   },
 );

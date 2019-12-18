@@ -19,5 +19,6 @@ var groupMessageSchema = new mongoose.Schema(
     },
   },
 );
+groupMessageSchema.index({ name: 1 });
 
 export default mongoose.model('GroupMessage', groupMessageSchema);

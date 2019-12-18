@@ -28,7 +28,6 @@ export default {
     addMessage: async (root, args, context) => {
       return context.message.addMessage(args, context);
     },
-
     createGroupChat: async (root, args, context) => {
       return context.message.createGroupChat(args);
     },

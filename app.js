@@ -9,8 +9,8 @@ import { ApolloServer, PubSub } from 'apollo-server-express';
 import typeDefs from './src/api/graphql/schema/schema';
 import resolvers from './src/api/graphql/resolvers/resolvers';
 const pubsub = new PubSub();
-import userRepo from './src/api/graphql/datasources/userRepo';
-import messageRepo from './src/api/graphql/datasources/messageRepo';
+import UserRepo from './src/api/graphql/datasources/UserRepo';
+import MessageRepo from './src/api/graphql/datasources/MessageRepo';
 import { secretSession, server, redisServer } from './src/config/index';
 const redisStore = require('connect-redis')(expressSession);
 const client = redis.createClient();
@@ -51,16 +51,10 @@ require('./src/utils/authenGrantPassport');
 
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', { session: true }, function(err, user, info) {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.redirect('/login');
-    }
+    if (err) return next(err);
+    if (!user) return res.redirect('/login');
     req.logIn(user, function(err) {
-      if (err) {
-        return next(err);
-      }
+      if (err) return next(err);
       return res.json(user);
     });
   })(req, res, next);
@@ -86,19 +80,14 @@ const serverGraphql = new ApolloServer({
     },
   },
   context: async ({ req, res, connection }) => {
-    if (connection) {
-      // check connection for metadata
-      return { connection, pubsub };
-    }
+    if (connection) return { connection, pubsub };
     let auth = null;
-    if (req) {
-      auth = req.user;
-    }
+    if (req) auth = req.user;
     return {
       pubsub,
       auth,
-      user: new userRepo(),
-      message: new messageRepo(),
+      user: new UserRepo(),
+      message: new MessageRepo(),
     };
   },
 });

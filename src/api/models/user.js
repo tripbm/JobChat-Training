@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    userId: Number,
+    userId: String,
     userName: {
       type: String,
       unique: true,
@@ -32,11 +32,10 @@ const userSchema = new Schema(
     },
   },
 );
+userSchema.index({ userId: 1 }, { email: 1 });
 userSchema.pre('save', async function(next) {
   const user = this;
-  if (!user.isModified('password')) {
-    return next();
-  }
+  if (!user.isModified('password')) return next();
   user.password = await hasPass.hash(user.password);
   next();
 });

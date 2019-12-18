@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 const { saltRounds } = require('../config');
 const Password = {
   hash: async password => {

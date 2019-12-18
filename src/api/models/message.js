@@ -3,10 +3,22 @@ const Schema = mongoose.Schema;
 
 const messageSchema = new Schema(
   {
-    message_id: Number,
-    content: String,
-    userId: Number,
-    groupId: Number,
+    messageId: {
+      type: Number,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    userId: {
+      type: Number,
+      required: true,
+    },
+    groupId: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: {
@@ -15,5 +27,6 @@ const messageSchema = new Schema(
     },
   },
 );
+messageSchema.index({ messageId: 1 });
 
 export default mongoose.model('Message', messageSchema);

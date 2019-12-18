@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { secret } = require('../config/index');
+import jwt from 'jsonwebtoken';
+const { secret } = require('../config');
 const secretOrPrivateKey = secret;
 
 const Token = {
@@ -14,14 +14,9 @@ const Token = {
             expiresIn: '1d',
           },
           (err, token) => {
-            if (err) {
-              reject(err);
-            }
-            const length = parseInt(token.length / 3);
+            if (err) reject(err);
             const res = {
               token: token,
-              one: token.slice(0, length),
-              two: token.slice(length),
             };
             resolve(res);
           },
@@ -32,9 +27,7 @@ const Token = {
   verifyToken: async token => {
     return new Promise((resolve, reject) => {
       jwt.verify(token, secretOrPrivateKey, (err, decoded) => {
-        if (err || !decoded) {
-          return resolve();
-        }
+        if (err || !decoded) return resolve();
         resolve(decoded);
       });
     });

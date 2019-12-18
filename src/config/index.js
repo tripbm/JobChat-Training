@@ -22,6 +22,7 @@ const SERVER_STATUS = {
   createFalse: 0,
   userExists: 2,
 };
+
 module.exports = {
   server,
   database,

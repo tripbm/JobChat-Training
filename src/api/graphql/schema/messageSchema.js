@@ -12,6 +12,7 @@ const typeDefs = gql`
     userName: String
     role: Int
   }
+
   type GroupChat {
     name: String
     members: [Member]
@@ -23,6 +24,7 @@ const typeDefs = gql`
     userName: String
     role: Int
   }
+
   input GroupChatInput {
     name: String
     members: [MemberInput]
@@ -33,6 +35,7 @@ const typeDefs = gql`
     message: String
     error: Int
   }
+
   extend type Query {
     messages(page: Int, limit: Int): [Message]
     listGroupChats(page: Int, limit: Int): [GroupChat]
