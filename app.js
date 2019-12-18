@@ -42,8 +42,6 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-require('./src/utils/authenGrantPassport');
-
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', { session: true }, function(err, user, info) {
     if (err) {
@@ -98,7 +96,6 @@ const serverGraphql = new ApolloServer({
   },
 });
 
-serverGraphql.applyMiddleware({ app, path: '/graphql' });
 
 const httpServer = createServer(app);
 serverGraphql.installSubscriptionHandlers(httpServer);
