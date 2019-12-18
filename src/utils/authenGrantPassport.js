@@ -6,9 +6,8 @@ import hashPass from './hashPass';
 
 const UserRepo = new userRepo();
 
-passport.use(new LocalStrategy(
-  async (username, password, done) => {
-    
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
     const user = await UserRepo.loginUserName({ username });
 
     if (!user) {
@@ -21,10 +20,10 @@ passport.use(new LocalStrategy(
     let results = {
       userID: user.userId,
       userName: user.userName,
-      role: user.role
+      role: user.role,
     };
 
     return done(null, results);
-  }
-));
+  }),
+);
 export default passport;
