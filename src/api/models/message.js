@@ -3,20 +3,16 @@ const Schema = mongoose.Schema;
 
 const messageSchema = new Schema(
   {
-    messageId: {
-      type: Number,
-      required: true,
-    },
     content: {
       type: String,
       required: true,
     },
     userId: {
-      type: Number,
+      type: String,
       required: true,
     },
     groupId: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

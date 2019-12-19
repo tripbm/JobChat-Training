@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-
-var groupMessageSchema = new mongoose.Schema(
+import { typeGroupChat, typeGroupChatDefault } from '../../config';
+var groupChatSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     members: [
@@ -10,7 +10,12 @@ var groupMessageSchema = new mongoose.Schema(
         role: { type: String, required: true },
       },
     ],
-    type: { type: String, required: true },
+    type: {
+      type: String,
+      enum: typeGroupChat,
+      default: typeGroupChatDefault,
+      required: true,
+    },
   },
   {
     timestamps: {
@@ -19,6 +24,4 @@ var groupMessageSchema = new mongoose.Schema(
     },
   },
 );
-groupMessageSchema.index({ name: 1 });
-
-export default mongoose.model('GroupMessage', groupMessageSchema);
+export default mongoose.model('GroupChat', groupChatSchema);

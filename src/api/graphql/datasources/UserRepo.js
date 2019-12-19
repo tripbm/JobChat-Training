@@ -8,7 +8,7 @@ class userRepo extends BaseRepo {
   }
   /**
    * function get user
-   * @param {number} id
+   * @param {Object} data
    */
   async createUser(data) {
     try {
@@ -16,8 +16,8 @@ class userRepo extends BaseRepo {
         error: 1,
         message: 'Create user false',
       };
-      const responses = await this.model.create(data);
-      if (responses) {
+      const userResults = await this.model.create(data);
+      if (userResults) {
         results = {
           error: 0,
           message: 'Create user success',
@@ -31,11 +31,53 @@ class userRepo extends BaseRepo {
   }
   /**
    *
+   * @param {Object} data
+   */
+  async updateUser(userId, data) {
+    try {
+      let results = {
+        error: 1,
+        message: 'Update user false',
+      };
+      const updateResults = await this.model.updateOne({ _id: userId }, data);
+      if (updateResults)
+        results = {
+          error: 0,
+          message: 'Update success',
+        };
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  }
+  /**
+   *
+   * @param {Number} id
+   */
+  async deleteUser({ id }) {
+    try {
+      let results = {
+        error: 1,
+        message: 'Delete user false',
+      };
+      const deleteResult = await this.model.deleteOne({ _id: id });
+      if (deleteResult.n === 1)
+        results = {
+          error: 0,
+          message: 'Delete user success',
+        };
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  }
+  /**
+   *
    * @param {Number} id
    */
   async getUserById({ id }) {
     try {
-      return this.model.findOne({ userId: id });
+      return this.model.findOne({ _id: id });
     } catch (error) {
       throw error;
     }

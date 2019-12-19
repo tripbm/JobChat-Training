@@ -6,11 +6,12 @@ import passport from 'passport';
 import expressSession from 'express-session';
 import redis from 'redis';
 import { ApolloServer, PubSub } from 'apollo-server-express';
-import typeDefs from './src/api/graphql/schema/schema';
-import resolvers from './src/api/graphql/resolvers/resolvers';
+import typeDefs from './src/api/graphql/schema';
+import resolvers from './src/api/graphql/resolvers';
 const pubsub = new PubSub();
 import UserRepo from './src/api/graphql/datasources/UserRepo';
 import MessageRepo from './src/api/graphql/datasources/MessageRepo';
+import GroupChatRepo from './src/api/graphql/datasources/GroupChatRepo';
 import { secretSession, server, redisServer } from './src/config/index';
 const redisStore = require('connect-redis')(expressSession);
 const client = redis.createClient();
@@ -60,15 +61,6 @@ app.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-app.use('/', (req, res, next) => {
-  if (!req.user)
-    return res.json({
-      message: 'You need permission to access!',
-      error: 1,
-    });
-  next();
-});
-
 const serverGraphql = new ApolloServer({
   introspection: true,
   typeDefs,
@@ -88,6 +80,7 @@ const serverGraphql = new ApolloServer({
       auth,
       user: new UserRepo(),
       message: new MessageRepo(),
+      groupChat: new GroupChatRepo(),
     };
   },
 });
