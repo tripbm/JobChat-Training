@@ -22,7 +22,10 @@ const SERVER_STATUS = {
   createFalse: 0,
   userExists: 2,
 };
-
+const role = ['superAdmin', 'admin', 'member'];
+const roleDefault = 'member';
+const typeGroupChat = ['private', 'public'];
+const typeGroupChatDefault = 'private';
 module.exports = {
   server,
   database,
@@ -31,4 +34,8 @@ module.exports = {
   LIMIT,
   SERVER_STATUS,
   redisServer,
+  role,
+  roleDefault,
+  typeGroupChat,
+  typeGroupChatDefault,
 };

@@ -1,10 +1,10 @@
 import hasPass from '../../../src/utils/hashPass';
+import { role, roleDefault } from '../../config';
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    userId: String,
     userName: {
       type: String,
       unique: true,
@@ -23,7 +23,11 @@ const userSchema = new Schema(
     birthday: Date,
     gender: Number,
     action: Boolean,
-    role: Number,
+    role: {
+      type: String,
+      enum: role,
+      default: roleDefault,
+    },
   },
   {
     timestamps: {

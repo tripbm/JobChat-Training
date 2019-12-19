@@ -15,14 +15,14 @@ export default {
     },
   },
   Query: {
-    messages: async (root, args, context) => {
+    listGroupChats: async (root, args, context) => {
       const { page, limit } = args;
-      return context.message.getAll({ page, limit });
+      return context.groupChat.getGroupChat({ page, limit });
     },
   },
   Mutation: {
-    addMessage: async (root, args, context) => {
-      return context.message.addMessage(args, context);
+    createGroupChat: async (root, args, context) => {
+      return context.groupChat.createGroupChat(args);
     },
   },
 };
