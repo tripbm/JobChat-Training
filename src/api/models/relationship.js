@@ -11,6 +11,5 @@ const relationshipSchema = new Schema({
     required: true,
   },
 });
-relationshipSchema.index({ messageId: 1 });
 
-export default mongoose.model('Relation', relationshipSchema);
+export default mongoose.model('Relationships', relationshipSchema);

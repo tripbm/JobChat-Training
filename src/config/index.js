@@ -11,6 +11,7 @@ const redisServer = {
   port: process.env.port_redis,
   ttl: process.env.ttl,
 };
+const origin_cors = process.env.origin_cors || 'http://localhost:3000';
 const database = {
   uri: process.env.mongoose_url,
   database_name: process.env.database_name,
@@ -22,10 +23,14 @@ const SERVER_STATUS = {
   createFalse: 0,
   userExists: 2,
 };
-const role = ['superAdmin', 'admin', 'member'];
-const roleDefault = 'member';
-const typeGroupChat = ['private', 'public'];
+const roleUser = ['superAdmin', 'admin', 'user'];
+const roleMember = ['admin', 'member'];
+const roleUserDefault = 'user';
+const roleMemberDefault = 'member';
+const typeGroupChat = ['private', 'public', 'group'];
 const typeGroupChatDefault = 'private';
+const gender = ['male', 'female', 'other'];
+const genderDefault = 'male';
 module.exports = {
   server,
   database,
@@ -34,8 +39,13 @@ module.exports = {
   LIMIT,
   SERVER_STATUS,
   redisServer,
-  role,
-  roleDefault,
+  roleUser,
+  roleUserDefault,
+  roleMember,
+  roleMemberDefault,
   typeGroupChat,
   typeGroupChatDefault,
+  gender,
+  genderDefault,
+  origin_cors,
 };

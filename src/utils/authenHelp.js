@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 const { secret } = require('../config');
-const secretOrPrivateKey = secret;
+const secretOrPrivateKey = 'secret';
 
 const Token = {
   setToken: async payload => {
