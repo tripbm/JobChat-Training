@@ -6,13 +6,15 @@ import passport from 'passport';
 import expressSession from 'express-session';
 import redis from 'redis';
 import { ApolloServer, PubSub } from 'apollo-server-express';
-import typeDefs from './src/api/graphql/schema';
+import typeDefs from './src/api/graphql/schemas';
 import resolvers from './src/api/graphql/resolvers';
 const pubsub = new PubSub();
 import UserRepo from './src/api/graphql/datasources/UserRepo';
 import MessageRepo from './src/api/graphql/datasources/MessageRepo';
 import GroupChatRepo from './src/api/graphql/datasources/GroupChatRepo';
-import { secretSession, server, redisServer } from './src/config/index';
+import RelationshipRepo from './src/api/graphql/datasources/RelationshipRepo';
+import { secretSession, server, redisServer, origin_cors } from './src/config';
+const cors = require('cors');
 const redisStore = require('connect-redis')(expressSession);
 const client = redis.createClient();
 const app = express();
@@ -21,7 +23,7 @@ const port = server.port;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+app.use(cors({ credentials: true, origin: origin_cors }));
 app.use(
   expressSession({
     secret: secretSession,
@@ -33,7 +35,7 @@ app.use(
     }),
     resave: false,
     cookie: { secure: false, maxAge: 86400000 },
-    saveUninitialized: false,
+    saveUninitialized: true,
   }),
 );
 
@@ -53,7 +55,6 @@ require('./src/utils/authenGrantPassport');
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', { session: true }, function(err, user, info) {
     if (err) return next(err);
-    if (!user) return res.redirect('/login');
     req.logIn(user, function(err) {
       if (err) return next(err);
       return res.json(user);
@@ -73,14 +74,13 @@ const serverGraphql = new ApolloServer({
   },
   context: async ({ req, res, connection }) => {
     if (connection) return { connection, pubsub };
-    let auth = null;
-    if (req) auth = req.user;
     return {
+      req,
       pubsub,
-      auth,
       user: new UserRepo(),
       message: new MessageRepo(),
       groupChat: new GroupChatRepo(),
+      relationship: new RelationshipRepo(),
     };
   },
 });

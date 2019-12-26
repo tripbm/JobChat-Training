@@ -1,5 +1,5 @@
 import hasPass from '../../../src/utils/hashPass';
-import { role, roleDefault } from '../../config';
+import { roleUser, roleUserDefault, gender, genderDefault } from '../../config';
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
@@ -21,12 +21,16 @@ const userSchema = new Schema(
     firstName: String,
     lastName: String,
     birthday: Date,
-    gender: Number,
+    gender: {
+      type: String,
+      enum: gender,
+      default: genderDefault,
+    },
     action: Boolean,
     role: {
       type: String,
-      enum: role,
-      default: roleDefault,
+      enum: roleUser,
+      default: roleUserDefault,
     },
   },
   {

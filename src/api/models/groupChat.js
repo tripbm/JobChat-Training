@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { typeGroupChat, typeGroupChatDefault } from '../../config';
+import { roleMember, roleMemberDefault, typeGroupChat, typeGroupChatDefault } from '../../config';
 var groupChatSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -7,7 +7,7 @@ var groupChatSchema = new mongoose.Schema(
       {
         userId: { type: String, required: true },
         userName: { type: String, required: true },
-        role: { type: String, required: true },
+        role: { type: String, enum: roleMember, default: roleMemberDefault, required: true },
       },
     ],
     type: {

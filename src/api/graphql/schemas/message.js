@@ -2,9 +2,9 @@ import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
   type Message {
+    groupId: String
     content: String
     userId: String
-    groupId: String
   }
 
   extend type Query {
@@ -12,11 +12,15 @@ const typeDefs = gql`
   }
 
   extend type Mutation {
-    addMessage(content: String, userId: String, groupId: String): Message
+    addMessage(content: String, groupId: String): Message
+    editMessage(content: String, groupId: String): Message
+    deleteMessage(content: String, groupId: String): Message
   }
 
   type Subscription {
-    messageAdded(groupId: String): Message
+    addedMessage(groupId: String): Message
+    editMessage(groupId: String): Message
   }
 `;
+
 export default typeDefs;

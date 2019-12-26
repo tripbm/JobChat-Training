@@ -4,26 +4,25 @@ const typeDefs = gql`
   type Member {
     userId: String!
     userName: String!
-    role: String
+    role: String!
   }
 
   type GroupChat {
     _id: String
     name: String
     members: [Member]
-    type: String
+    type: String!
   }
 
   input MemberInput {
-    userId: String
-    userName: String
-    role: String
+    userId: String!
+    userName: String!
+    role: String!
   }
 
   input GroupChatInput {
     name: String
-    members: [MemberInput]
-    type: String
+    members: [MemberInput]!
   }
 
   type Results {
@@ -32,11 +31,15 @@ const typeDefs = gql`
   }
 
   extend type Query {
-    listGroupChats(page: Int, limit: Int): [GroupChat]
+    listGroupChatById: [GroupChat]
   }
 
   extend type Mutation {
-    createGroupChat(data: GroupChatInput): Results
+    createGroupChat(data: GroupChatInput): GroupChat!
+    deleteGroupChat(groupChatId: String!): Results
+    addMemberGroupChat(memberId: String!, role: String!, groupChatId: String!): Results
+    leaveGroupChat(groupChatId: String!): Results
   }
 `;
+
 export default typeDefs;

@@ -11,7 +11,7 @@ passport.use(
     let chechPassword = await hashPass.compare(password, user.password);
     if (!chechPassword) return done(null, false, { message: 'Incorrect password.' });
     let results = {
-      userID: user.userId,
+      userId: user._id,
       userName: user.userName,
       role: user.role,
     };
