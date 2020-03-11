@@ -1,8 +1,8 @@
 # JobChat-Training
 
 ## Infor:
-- Nguyễn Văn A
-- Demo: 01/01/2020
+- Phạm Bùi Minh Trí
+- Demo: 09/12/2019 - 13/12/2019
 
 ## Requirement:
 - Authencation (login/register by email)
@@ -13,8 +13,6 @@
 - View TO/REP
 
 ## Technical Require:
-- Android: Kotlin, RxJava, RxAndroid, Firebase(Authencation, Realtime DB), MVP
-- IOS: Swift, RxSwift, RxCocoa, Firebase(Authencation, Realtime DB) , MVP
 - Web (NodeJS - VueJS/ReactJS): *TBD*
 
 ## Prototype:
